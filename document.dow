@@ -1,0 +1,25 @@
+from markdown_it import MarkdownIt
+from mdit_py_plugins.front_matter import front_matter_plugin
+from mdit_py_plugins.footnote import footnote_plugin
+
+// File Purpose: to go through the file url json output and retrieve the information
+// needed
+
+
+def url_crawler():
+
+    md = (
+        MarkdownIt('commonmark', {'breaks':True,'html':True})
+        .use(front_matter_plugin)
+        .use(footnote_plugin)
+        .enable('table')
+    )
+
+    // Next Step: integrate markdown-it-py library from python into this file so I can scrape text
+    // figure out is there a consistent point at which the doc text starts and ends
+
+    // Let me get the articles solely from pitch fork
+
+
+if __name__ == "main":
+    url_crawler()
