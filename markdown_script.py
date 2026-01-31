@@ -126,9 +126,13 @@ def validate_url(url):
         url = 'https://' + url
     return url
 
-
 def main():
     print("Reaches main method")
+
+    # method call for retrieving the pitchfork urls | return list of urls
+
+    # method call for retrieving the alexnet articles | return list of urls
+
     parser = argparse.ArgumentParser(description='Download webpage and convert to markdown')
     parser.add_argument('-urls', help='Additional URLs to download', nargs='*', required=True)
     parser.add_argument('-o', '--output', help='Output filename')
