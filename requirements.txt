@@ -4,3 +4,5 @@ unstructured # Document loading
 chromadb # Vector storage
 openai # For embeddings
 tiktoken  # For embeddings
+langchain_community
+dotenv

@@ -7,6 +7,10 @@ from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 
+# the purpose of this file: to query the vector database created in create_database.py based on the 
+# prompt provided by the user for relevant documents. Then use the LLM to answer the question
+# based on the context of the relevant documents. It also documents the sources used to answer the question.
+
 _ = load_dotenv(find_dotenv())
 my_api_key = os.environ['OPENAI_API_KEY']
 CHROMA_PATH = "chroma"
@@ -18,9 +22,13 @@ Answer this question based on the context above: {question}
 """
 
 def chatbot_response():
+    # purpose of method: it retrieves the prompt from the user, isolate the relevant documents
+    # from the db, puts those files in the context of the prompt, and then uses the LLM to answer the question based on the context.
+    # Finally, it documents the sources used to answer the question.
+
     # Parser to input the query text in the command line
 
-    # so this arg parser parses the prompt from the user
+    # arg parser parses the prompt from the user
     parser = argparse.ArgumentParser()
     parser.add_argument("query_text", type=str, help="The text to search for")
     args = parser.parse_args()
@@ -30,9 +38,9 @@ def chatbot_response():
     embedding_function = OpenAIEmbeddings()
     db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
     
-    # search the db for the relevant chunks -> returns a list of (document, score) tuples
-    # 
-    results = db.similarity_search_with_relevance_scores(query_text, k=4) # k is the number of results to return
+    # search the vector db for the relevant chunks -> returns a list of (document, score) tuples
+    
+    results = db.similarity_search_with_relevance_scores(query_text, f=4) # k is the number of results to return
     if len(results) == 0 or results[0][1] < 0.7: # if the relevance score of the first result is less than 0.7, return
         print(f"Unable to find matching results for {query_text}")
         return

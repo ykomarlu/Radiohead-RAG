@@ -8,10 +8,12 @@ from langchain.schema import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma # Chroma in an open-source embedding database
 
+# Purpose of file: this file is responsible for creating the documents and separating them into chunks, 
+
 _ = load_dotenv(find_dotenv()) # read local .env file
 my_api_key = os.environ['OPENAI_API_KEY']
 CHROMA_PATH = "chroma"
-DATA_PATH = "data/aws_ec2_documentation"
+DATA_PATH = "data"
 
 def generate_data_store():
     documents = load_documents()
